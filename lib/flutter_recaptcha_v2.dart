@@ -18,7 +18,8 @@ class RecaptchaV2 extends StatefulWidget {
 
   final ValueChanged<bool> onVerifiedSuccessfully;
   final ValueChanged<String> onVerifiedError;
-
+   ValueChanged<String> onToken;
+ 
   RecaptchaV2({
     this.apiKey,
 
@@ -52,7 +53,8 @@ class _RecaptchaV2State extends State<RecaptchaV2> {
       dynamic json = jsonDecode(response.body);
       if (json['success']) {
         widget.onVerifiedSuccessfully(true);
-        controller.setToken(json.toString());
+widget.onToken(json.toString());
+        controller.responseToken=json.toString();
       } else {
         widget.onVerifiedSuccessfully(false);
         widget.onVerifiedError(json['error-codes'].toString());
@@ -115,6 +117,7 @@ class _RecaptchaV2State extends State<RecaptchaV2> {
                       if (_token.contains("verify")) {
                         _token = _token.substring(7);
                       }
+                      controller.responseToken=_token;
                       verifyToken(_token);
                     },
                   ),
@@ -159,10 +162,7 @@ class RecaptchaV2Controller extends ChangeNotifier {
 
   String responseToken;
   bool get visible => _visible;
- void setToken(String token) {
-    responseToken=token;
-    notifyListeners();
-  }
+
 
 
   void show() {
