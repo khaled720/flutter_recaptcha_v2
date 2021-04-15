@@ -11,6 +11,7 @@ class RecaptchaV2 extends StatefulWidget {
   final String apiKey;
   final String apiSecret;
   final String pluginURL;
+  String responseToken;
   final RecaptchaV2Controller controller;
   bool visibleCancelBottom;
   String textCancelButtom;
@@ -20,6 +21,7 @@ class RecaptchaV2 extends StatefulWidget {
 
   RecaptchaV2({
     this.apiKey,
+
     this.apiSecret,
     this.pluginURL: "https://recaptcha-flutter-plugin.firebaseapp.com/",
     this.visibleCancelBottom: false,
@@ -50,6 +52,7 @@ class _RecaptchaV2State extends State<RecaptchaV2> {
       dynamic json = jsonDecode(response.body);
       if (json['success']) {
         widget.onVerifiedSuccessfully(true);
+        controller.setToken(token);
       } else {
         widget.onVerifiedSuccessfully(false);
         widget.onVerifiedError(json['error-codes'].toString());
@@ -121,7 +124,7 @@ class _RecaptchaV2State extends State<RecaptchaV2> {
                 },
               ),
               Visibility(
-                visible: widget.visibleCancelBottom,
+                visible:false,// widget.visibleCancelBottom,
                 child: Align(
                   alignment: Alignment.bottomCenter,
                   child: SizedBox(
@@ -153,7 +156,14 @@ class RecaptchaV2Controller extends ChangeNotifier {
   List<VoidCallback> _listeners = [];
 
   bool _visible = false;
+
+  String responseToken;
   bool get visible => _visible;
+ void setToken(String token) {
+    responseToken=token;
+    notifyListeners();
+  }
+
 
   void show() {
     _visible = true;
