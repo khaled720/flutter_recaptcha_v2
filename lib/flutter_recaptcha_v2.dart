@@ -52,7 +52,7 @@ class _RecaptchaV2State extends State<RecaptchaV2> {
       dynamic json = jsonDecode(response.body);
       if (json['success']) {
         widget.onVerifiedSuccessfully(true);
-        controller.setToken(token);
+        controller.setToken(json.toString());
       } else {
         widget.onVerifiedSuccessfully(false);
         widget.onVerifiedError(json['error-codes'].toString());
