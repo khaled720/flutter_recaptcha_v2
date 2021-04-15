@@ -28,6 +28,8 @@ class RecaptchaV2 extends StatefulWidget {
     this.visibleCancelBottom: false,
     this.textCancelButtom: "CANCEL CAPTCHA",
     RecaptchaV2Controller controller,
+    this.onToken,
+
     this.onVerifiedSuccessfully,
     this.onVerifiedError,
   })  : controller = controller ?? RecaptchaV2Controller(),
