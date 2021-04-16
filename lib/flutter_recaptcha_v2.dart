@@ -9,7 +9,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 class RecaptchaV2 extends StatefulWidget {
   final String apiKey;
-  final String apiSecret;
+//  final String apiSecret;
   final String pluginURL;
   String responseToken;
   final RecaptchaV2Controller controller;
@@ -23,7 +23,7 @@ class RecaptchaV2 extends StatefulWidget {
   RecaptchaV2({
     this.apiKey,
 
-    this.apiSecret,
+    //this.apiSecret,
     this.pluginURL: "https://recaptcha-flutter-plugin.firebaseapp.com/",
     this.visibleCancelBottom: false,
     this.textCancelButtom: "CANCEL CAPTCHA",
@@ -33,8 +33,8 @@ class RecaptchaV2 extends StatefulWidget {
     this.onVerifiedSuccessfully,
     this.onVerifiedError,
   })  : controller = controller ?? RecaptchaV2Controller(),
-        assert(apiKey != null, "Google ReCaptcha API KEY is missing."),
-        assert(apiSecret != null, "Google ReCaptcha API SECRET is missing.");
+        assert(apiKey != null, "Google ReCaptcha API KEY is missing.");
+      //  assert(apiSecret != null, "Google ReCaptcha API SECRET is missing.");
 
   @override
   State<StatefulWidget> createState() => _RecaptchaV2State();
@@ -47,7 +47,7 @@ class _RecaptchaV2State extends State<RecaptchaV2> {
   void verifyToken(String token) async {
     String url = "https://www.google.com/recaptcha/api/siteverify";
     http.Response response = await http.post(Uri.parse(url), body: {
-      "secret": widget.apiSecret,
+   //   "secret": widget.apiSecret,
       "response": token,
     });
 
@@ -120,7 +120,7 @@ widget.onToken(json.toString());
                         _token = _token.substring(7);
                       }
                       controller.responseToken=_token;
-                      verifyToken(_token);
+                   //   verifyToken(_token);
                     },
                   ),
                 ].toSet(),
