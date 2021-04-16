@@ -54,7 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
           RecaptchaV2(
-            apiKey: "6LeCwZYUAAAAAJo8IVvGX9dH65Rw89vxaxErCeou",
+            apiKey: "6Ld9tzkUAAAAAMhpwsfhKfIhiwPVEl3fARnoQe40",
          //   apiSecret: "6LeCwZYUAAAAAKGahIjwfOARevvRETgvwhPMKCs_",
             controller: recaptchaV2Controller,
             onVerifiedError: (err){

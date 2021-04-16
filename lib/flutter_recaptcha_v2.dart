@@ -120,6 +120,7 @@ widget.onToken(json.toString());
                         _token = _token.substring(7);
                       }
                       controller.responseToken=_token;
+                   widget.onVerifiedSuccessfully(true);
                    //   verifyToken(_token);
                     },
                   ),
